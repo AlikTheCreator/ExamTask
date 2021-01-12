@@ -65,7 +65,7 @@ namespace ExamTask
 
             ctx.SaveChanges();
         }
-        public static List<Doctor> GetSpecialization(string cityName)
+        public static List<string> GetSpecialization(string cityName)
         {
             using (var ctx = new CityContext())
             {
@@ -73,7 +73,7 @@ namespace ExamTask
                                   join c in ctx.Cities 
                                   on d.CityId equals c.Id
                                   where c.Name == cityName 
-                                  select d);
+                                  select d.Specialization);
                 return responseDB.ToList();
             }
         }
@@ -81,7 +81,7 @@ namespace ExamTask
         {
             foreach (var b in GetSpecialization("Kiev"))
             {
-                Console.WriteLine(b.Specialization);
+                Console.WriteLine(b);
             }
         }
     }
